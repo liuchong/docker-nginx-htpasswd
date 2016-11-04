@@ -42,16 +42,16 @@ monitor ()
 
 
 # pickup the arguments
-while getopts "u:p:f:a:P:X:" arg
+while getopts "u:p:c:a:P:X:" arg
 do
     case $arg in
         u)
-            HT_USERNAME="$OPTARG"
+            USERNAME="$OPTARG"
             ;;
         p)
-            HT_PASSWORD="$OPTARG"
+            PASSWORD="$OPTARG"
             ;;
-        f)
+        c)
             SCRIPT="$OPTARG"
             ;;
 	a)
@@ -67,7 +67,7 @@ do
         echo >/dev/stderr -e "usage:\n"\
              "-u [username] your http username.\n"\
              "-p [password] your http password.\n"\
-             "-f [script] your specified script.\n"\
+             "-c [script] your specified script.\n"\
 	     "-a [args] args of your script.\n"\
 	     "-P [args] nginx listening port.\n"\
 	     "-X [args] proxy_pass of host:port."
@@ -79,12 +79,12 @@ done
 
 # check the variables, you can also set them as the environment variables
 # http username
-if [ -z $HT_USERNAME ]; then
+if [ -z $USERNAME ]; then
     echo >/dev/stderr "username did not provided!"
     exit 1
 fi
 # http password
-if [ -z $HT_PASSWORD ]; then
+if [ -z $PASSWORD ]; then
     echo >/dev/stderr "password did not provided!"
     exit 1
 fi
@@ -104,7 +104,7 @@ if [ -z $SCRIPT ] && [ ! -z $ARGS ]; then
     exit 1
 fi
 # is script was provided, it must has the execute permission
-if [ ! -z $SCRIPT ] && [ ! -x $SCRIPT ]; then
+if [ ! -z $SCRIPT ] && [ -z `which $SCRIPT` ]; then
     echo >/dev/stderr "provided script without execute permission!"
     exit 1
 fi
@@ -118,7 +118,7 @@ fi
 
 
 # just do it!
-setpasswd $HT_USERNAME $HT_PASSWORD
+setpasswd $USERNAME $PASSWORD
 setnginx $PORT $PROXY_PASS
 start $SCRIPT $ARGS
 monitor $njobs
