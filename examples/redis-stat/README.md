@@ -1,6 +1,6 @@
 # Build a redis-stat service with login
 
-We will use [redis-stat](https://github.com/junegunn/redis-stat).
+We will use [redis-stat](https://github.com/junegunn/redis-stat)
 
 0. read the Dockerfile
 1. change 'your-redis-host' and 'your-redis-port' to the real ones

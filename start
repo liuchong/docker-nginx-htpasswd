@@ -41,8 +41,20 @@ monitor ()
 }
 
 
+usage ()
+{
+    echo -e "usage:\n"\
+         "-u [username] your http username\n"\
+         "-p [password] your http password\n"\
+         "-c [script] your specified script\n"\
+	 "-a [args] args of your script\n"\
+	 "-P [args] nginx listening port\n"\
+	 "-X [args] proxy_pass of host:port"
+}
+
+
 # pickup the arguments
-while getopts "u:p:c:a:P:X:" arg
+while getopts "u:p:c:a:P:X:h" arg
 do
     case $arg in
         u)
@@ -63,14 +75,12 @@ do
 	X)
 	    PROXY_PASS="$OPTARG"
 	    ;;
+	h)
+	    usage
+	    exit 0
+	    ;;
         ?)
-        echo >/dev/stderr -e "usage:\n"\
-             "-u [username] your http username.\n"\
-             "-p [password] your http password.\n"\
-             "-c [script] your specified script.\n"\
-	     "-a [args] args of your script.\n"\
-	     "-P [args] nginx listening port.\n"\
-	     "-X [args] proxy_pass of host:port."
+	echo "$(usage)" >/dev/stderr
         exit 1
         ;;
     esac

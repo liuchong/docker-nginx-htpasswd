@@ -1,6 +1,6 @@
 # Build a proxy service only with username/password
 
-Assume there is running a http service on your-host:your-port without login.
+Assume there is running a http service on your-host:your-port without login
 
 0. read the Dockerfile
 1. docker build -t proxy-only .
