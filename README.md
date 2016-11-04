@@ -19,3 +19,5 @@ Please check [examples](https://github.com/liuchong/docker-nginx-htpasswd/tree/m
 [proxy-only](https://github.com/liuchong/docker-nginx-htpasswd/tree/master/examples/proxy-only)
 
 [redis-stat](https://github.com/liuchong/docker-nginx-htpasswd/tree/master/examples/redis-stat)
+
+Certainly, you can copy and paste the codes from this repository to fit your need, enjoy your self!
