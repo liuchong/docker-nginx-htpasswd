@@ -53,7 +53,7 @@ usage ()
 }
 
 
-# pickup the arguments
+# parse the arguments
 while getopts "u:p:c:a:P:X:h" arg
 do
     case $arg in
