@@ -4,15 +4,15 @@
 # set username/password, $1 is username and $2 is password
 setpasswd ()
 {
-    htpasswd -bc /etc/nginx/.htpasswd $1 $2
+    htpasswd -bc /etc/nginx/.htpasswd "$1" "$2"
 }
 
 
 # set listen port and proxy_pass target in nginx configuration
 setnginx ()
 {
-    sed -i "s/__LISTEN__/$1/" /etc/nginx/conf.d/default.conf
-    sed -i "s/__PROXY_PASS__/$2/" /etc/nginx/conf.d/default.conf
+    sed -i "s|__LISTEN__|$1|" /etc/nginx/conf.d/default.conf
+    sed -i "s|__PROXY_PASS__|$2|" /etc/nginx/conf.d/default.conf
 }
 
 
@@ -90,38 +90,38 @@ done
 
 # check the variables, you can also set them as the environment variables
 # http username
-if [ -z $USERNAME ]; then
+if [ -z "$USERNAME" ]; then
     echo >/dev/stderr "username did not provided!"
     exit 1
 fi
 # http password
-if [ -z $PASSWORD ]; then
+if [ -z "$PASSWORD" ]; then
     echo >/dev/stderr "password did not provided!"
     exit 1
 fi
 # listen port
-if [ -z $PORT ]; then
+if [ -z "$PORT" ]; then
     echo >/dev/stderr "nginx listening port not provided!"
     exit 1
 fi
 # proxy_pass target
-if [ -z $PROXY_PASS ]; then
+if [ -z "$PROXY_PASS" ]; then
     echo >/dev/stderr "nginx proxy_pass target not provided!"
     exit 1
 fi
 # if args was provided, script must also be provided
-if [ -z $SCRIPT ] && [ ! -z $ARGS ]; then
+if [ -z "$SCRIPT" ] && [ ! -z "$ARGS" ]; then
     echo >/dev/stderr "provided args without script!"
     exit 1
 fi
 # is script was provided, it must has the execute permission
-if [ ! -z $SCRIPT ] && [ -z `which $SCRIPT` ]; then
+if [ ! -z "$SCRIPT" ] && [ -z `which "$SCRIPT"` ]; then
     echo >/dev/stderr "provided script without execute permission!"
     exit 1
 fi
 # if script provided, will run both nginx and script then will 2 jobs,
 # or just nginx server so there will be only 1 job.
-if [ $SCRIPT ]; then
+if [ "$SCRIPT" ]; then
     njobs=2
 else
     njobs=1
@@ -129,7 +129,7 @@ fi
 
 
 # just do it!
-setpasswd $USERNAME $PASSWORD
-setnginx $PORT $PROXY_PASS
-start $SCRIPT $ARGS
-monitor $njobs
+setpasswd "$USERNAME" "$PASSWORD"
+setnginx "$PORT" "$PROXY_PASS"
+start "$SCRIPT" "$ARGS"
+monitor "$njobs"
