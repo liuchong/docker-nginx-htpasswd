@@ -6,3 +6,4 @@ Assume there is running a http service on your-host:your-port without login
 1. docker build -t proxy-only .
 2. docker run --rm -it -p 8080:8080 proxy-only start -P 8080 -X http://your-host:your-port
 3. goto http://localhost:8080 with your favorite browser
+4. on step 2, you can also use -X your-host:your-port, will insert http:// by default
