@@ -9,9 +9,12 @@ setpasswd ()
 
 
 # set listen port and proxy_pass target in nginx configuration
+# need pass protocol such as http://... or https://... at $2 as proxy_pass
+# if no protocal ahead of $2, will insert http:// by default
 setnginx ()
 {
-    awk 'gsub("__LISTEN__","'$1'") gsub("__PROXY_PASS__","'$2'") {print $0}' \
+    local P=`echo $2 | sed 's|\(\(^http://\)*\)|http://|'`
+    awk 'gsub("__LISTEN__","'$1'") gsub("__PROXY_PASS__","'$P'") {print $0}' \
         /etc/nginx/conf.d/default.conf \
         > /etc/nginx/conf.d/default.conf.new && \
         mv /etc/nginx/conf.d/default.conf.new /etc/nginx/conf.d/default.conf
