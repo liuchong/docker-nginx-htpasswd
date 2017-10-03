@@ -1,4 +1,6 @@
 # docker-ngxpasswd
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fliuchong%2Fdocker-nginx-htpasswd.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fliuchong%2Fdocker-nginx-htpasswd?ref=badge_shield)
+
 Docker of nginx proxy tool with username/password.
 
 ## Usage:
@@ -25,3 +27,6 @@ Certainly, you can copy and paste the codes from this repository to fit your nee
 ## License
 
 [MIT](LICENSE)
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fliuchong%2Fdocker-nginx-htpasswd.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fliuchong%2Fdocker-nginx-htpasswd?ref=badge_large)
